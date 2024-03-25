@@ -1,5 +1,7 @@
+# Importing necessary modules from tkinter library
 from tkinter import *
 
+# Creating a tkinter window
 win = Tk()
 
 # Setting the initial dimensions of the window
@@ -8,19 +10,23 @@ win.geometry("312x324")
 # Ensuring the window size remains fixed (not resizable)
 win.resizable(0, 0)
 
+# Setting the title of the window
 win.title('Calculator')
 
+# Function to clear the input field
 def btn_clear():
     global expression
-    expression = ""
-    input_text.set(expression)  # Clearing the input field
+    expression = ""  # Clearing the expression
+    input_text.set("")  # Clearing the input field
 
+# Function to delete the last character from the input field
 def btn_delete():
     global expression
     expression = input_text.get()  # Getting the current expression
     new_expression = expression[:-1]  # Removing the last character
     input_text.set(new_expression)  # Updating the input field
 
+# Function to calculate percentage of the current expression
 def btn_percent():
     global expression
     expression = input_text.get()  # Getting the current expression
@@ -30,19 +36,23 @@ def btn_percent():
     input_text.set(result)  # Updating the input field
     expression = f"{result}"  # Updating the expression
 
+# Function to handle button clicks
 def btn_click(item):
     global expression
     expression = expression + str(item)  # Appending clicked button value to expression
     input_text.set(expression)  # Updating the input field
 
+# Function to evaluate the expression and display the result
 def btn_equal():
     global expression
     result = str(eval(expression))  # Evaluating the expression
     input_text.set(result)  # Updating the input field with result
-    expression = f"{result}"
+    expression = f"{result}"  # Updating the expression
 
+# Initializing the expression variable
 expression = ""
 
+# Creating a StringVar to store and manipulate the input field text
 input_text = StringVar()
 
 # Creating a frame for the input field
@@ -53,7 +63,7 @@ input_frame.pack(side=TOP)
 input = Entry(input_frame, width=50, textvariable=input_text, bg="#000", fg="#fff", font=('arial', 21, 'bold'), bd=0, justify=RIGHT)
 input.insert(0, '0')  # Inserting default value '0' into input field
 input.grid(row=0, column=0)
-input.pack(ipady=10)  # Adjusting internal padding in y-axis
+input.pack(ipady=10)  # Adjusting internal padding in y-direction
 
 # Creating a frame for the buttons
 btn = Frame(win, width=312, height=272.5, bg='grey')
